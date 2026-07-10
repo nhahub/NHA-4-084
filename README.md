@@ -3,7 +3,7 @@
   <img width="1024" height="559" alt="image_7d86d91f-e6af-467e-a710-7a9ec9e6678f" src="https://github.com/user-attachments/assets/95845645-feb9-41e4-9420-20cdc9558f14" />
 
 <p><em>Choose the car that best fits your needs with data-driven insights.</em></p>
-<p><a href="#"><strong>🔗 Live App</strong></a></p>
+<p><a href="https://car-decision-assistant-1.streamlit.app/"><strong>🔗 Live App</strong></a></p>
 </div>
 
 ## 📋 Overview
@@ -240,5 +240,5 @@ For detailed guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md) (if available).
 
 <div align="center">
 <p><strong>Made with ❤️ by the NHA Team</strong></p>
-<p><a href="#"><strong>🔗 Live App</strong></a> | <a href="https://github.com/nhahub/NHA-4-084">GitHub</a></p>
+<p><a href="https://car-decision-assistant-1.streamlit.app/"><strong>🔗 Live App</strong></a> | <a href="https://github.com/nhahub/NHA-4-084">GitHub</a></p>
 </div>
