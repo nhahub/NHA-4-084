@@ -1,5 +1,7 @@
 <div align="center">
 <h1>🚗 Car Decision Assistant</h1>
+  <img width="1024" height="559" alt="image_7d86d91f-e6af-467e-a710-7a9ec9e6678f" src="https://github.com/user-attachments/assets/95845645-feb9-41e4-9420-20cdc9558f14" />
+
 <p><em>Choose the car that best fits your needs with data-driven insights.</em></p>
 <p><a href="#"><strong>🔗 Live App</strong></a></p>
 </div>
@@ -84,19 +86,8 @@ We built a robust, scalable **Data Warehouse** leveraging **Databricks** and the
 
 ### 3️⃣ Data Flow Diagram
 
-```
-Web Sources (Hatla2ee, ContactCars, YallaMotor)
-            ↓
-        Scraping
-            ↓
-       Bronze Layer (Raw Data)
-            ↓
-       Silver Layer (Cleansed)
-            ↓
-        Gold Layer (Refined)
-            ↓
-   Streamlit App & Power BI Dashboards
-```
+<img width="1024" height="582" alt="image_10c3562b-c685-493c-b9ef-380b113f970b" src="https://github.com/user-attachments/assets/4659ee06-6da7-403a-87dc-a4b26a3da30a" />
+
 
 ---
 
@@ -118,22 +109,18 @@ Web Sources (Hatla2ee, ContactCars, YallaMotor)
 ```
 NHA-4-084/
 ├── notebooks/              # Jupyter notebooks for ETL pipelines
-│   ├── bronze_ingestion.ipynb
-│   ├── silver_cleaning.ipynb
-│   ├── gold_aggregation.ipynb
-│   └── exploratory_analysis.ipynb
+│   ├── bronze_layer.ipynb
+│   ├── silver_layer.ipynb
+│   ├── gold_layer.ipynb
 ├── src/                    # Python modules
-│   ├── scrapers/          # Web scraping modules
-│   ├── data_processing/   # Transformation logic
-│   ├── utils/             # Helper functions
-│   └── config/            # Configuration files
-├── streamlit_app/         # Streamlit frontend application
-│   └── app.py
+│   ├── scrapers/          # Web scraping
+module
+├── streamlit_app/         # Streamlit
 ├── power_bi/              # Power BI report definitions
 ├── data/                  # Sample datasets
 ├── requirements.txt       # Python dependencies
 ├── README.md             # This file
-└── LICENSE               # License information
+information
 ```
 
 ---
@@ -212,13 +199,6 @@ streamlit run streamlit_app/app.py
 # Creates business-ready datasets with outlier filtering
 ```
 
-### Exploring Data
-
-- **Jupyter Notebooks:** Use `notebooks/exploratory_analysis.ipynb` for ad-hoc analysis
-- **Power BI:** Connect to Gold layer tables for advanced visualizations
-
----
-
 ## 🚀 Future Enhancements
 
 - 🤖 **AI Price Prediction Models:** Implement regression and ensemble methods for price forecasting
@@ -255,12 +235,6 @@ For detailed guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md) (if available).
 | **Mohamed Ateya Elhag** | Data Engineering & Architecture |
 | **Khaled Abdelmageed** | Data Engineering & Architecture |
 | **Karim Wessam** | Data Engineering & Architecture |
-
----
-
-## 📄 License
-
-[Add your license here - e.g., MIT, Apache 2.0, etc.]
 
 ---
 
