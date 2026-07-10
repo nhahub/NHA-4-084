@@ -1,30 +1,252 @@
 <div align="center">
 <h1>🚗 Car Decision Assistant</h1>
-*Choose the car that best fits your needs with data-driven insights.*
-Live App
+<p><em>Choose the car that best fits your needs with data-driven insights.</em></p>
+<p><a href="#"><strong>🔗 Live App</strong></a></p>
 </div>
+
+## 📋 Overview
+
+**Car Decision Assistant** is an AI-powered platform that analyzes the Egyptian used car market to help buyers find the best vehicle at fair prices. It combines real-time web scraping, data engineering, and machine learning to provide data-driven insights across multiple sources (Hatla2ee, ContactCars, YallaMotor).
+
+The platform leverages a **Medallion Architecture** on **Databricks** to autonomously scrape, clean, and centralize automotive market data, enabling accurate price estimation and market analysis.
+
+---
+
+## 📚 Table of Contents
+
+- [Overview](#-overview)
+- [Business Problem & Solution](#-business-problem--solution)
+- [Tech Stack](#-tech-stack)
+- [Pipeline Architecture](#-pipeline-architecture--etl-flow)
+- [Features](#-features)
+- [Project Structure](#-project-structure)
+- [Getting Started](#-getting-started)
+- [Usage](#-usage)
+- [Future Enhancements](#-future-enhancements)
+- [Team](#-team)
+
+---
+
 ## 📊 Business Problem & Solution
-**The Problem:** The used car market in Egypt suffers from fragmented information. Prices fluctuate frequently, and data is scattered across multiple platforms (Hatla2ee, ContactCars, YallaMotor). Buyers waste hours manually comparing listings, and purchasing decisions are often based on assumptions rather than real market data.
-**The Solution:** An end-to-end Data Engineering pipeline that autonomously scrapes, cleans, and centralizes real-time automotive market data. The **Car Decision Assistant** utilizes AI-ready datasets to analyze market trends, detect pricing anomalies, and provide users with a unified, interactive platform for making optimal purchasing decisions.
+
+### The Problem
+The used car market in Egypt suffers from fragmented information:
+- **Price Volatility:** Prices fluctuate frequently without clear patterns
+- **Scattered Data:** Information dispersed across multiple platforms (Hatla2ee, ContactCars, YallaMotor)
+- **Data Quality Issues:** No centralized source of truth for accurate market pricing
+- **Inefficient Decision-Making:** Buyers lack data-driven insights to make informed purchases
+
+### The Solution
+An end-to-end **Data Engineering pipeline** that:
+- ✅ Autonomously scrapes real-time data from multiple sources
+- ✅ Cleans and validates data at scale
+- ✅ Centralizes information in an AI-ready data warehouse
+- ✅ Provides accurate price estimates and market analytics
+- ✅ Delivers actionable insights via interactive dashboards
+
+---
+
+## 🛠️ Tech Stack
+
+| Component | Technology |
+| :--- | :--- |
+| **Data Ingestion** | Selenium, Undetected-Chromedriver, Pandas |
+| **Data Warehouse** | Databricks, Delta Lake |
+| **Data Processing** | PySpark, SQL |
+| **Frontend** | Streamlit |
+| **Visualization** | Power BI |
+| **Languages** | Python (70.9%), Jupyter Notebooks (69.1%) |
+| **Infrastructure** | Cloud-based (Databricks) |
+
+---
+
 ## 🏗️ Pipeline Architecture & ETL Flow
-We built a robust, scalable Data Warehouse leveraging **Databricks** and the **Medallion Architecture**.
+
+We built a robust, scalable **Data Warehouse** leveraging **Databricks** and the **Medallion Architecture**.
+
 ### 1️⃣ Data Ingestion (Web Scraping)
- * **Sources:** Hatla2ee, ContactCars, YallaMotor.
- * **Tools:** selenium, undetected-chromedriver, pandas.
- * **Challenges Overcome:** Bypassed dynamic website structures, infinite scrolling, frequent HTML updates, and stringent Cloudflare anti-bot mechanisms.
+
+* **Sources:** Hatla2ee, ContactCars, YallaMotor
+* **Tools:** Selenium, Undetected-Chromedriver, Pandas
+* **Challenges Overcome:**
+  - Bypassed dynamic website structures and infinite scrolling
+  - Handled frequent HTML updates
+  - Defeated stringent Cloudflare anti-bot mechanisms
+  - Automated continuous data collection
+
 ### 2️⃣ The Medallion Architecture (Delta Lake)
 
 | Layer | Purpose & Transformations |
 | :--- | :--- |
-| 🥉 **Bronze** | **Raw Data:** Immutable historical archive. Scraped CSV files are ingested as-is without altering schemas to preserve original data state. |
-| 🥈 **Silver** | **Cleansing & Validation:** String normalization (lower, initcap, regex text removal). Strict data type casting (bigint, double). Listing dates standardized to YYYY-MM-DD. Duplicate and missing value handling. |
-| 🥇 **Gold** | **Business & AI Ready:** Statistical anomaly detection. PySpark Window functions remove extreme price outliers exceeding 3 standard deviations (Price <= Mean + 3*StdDev). Data aggregated into optimized marts (e.g., Gold_price_by_model). | <br> ## 🌍 Platform Features & Outputs
+| 🥉 **Bronze** | **Raw Data:** Immutable historical archive. Scraped CSV files ingested as-is without altering schemas to preserve original data state. |
+| 🥈 **Silver** | **Cleansing & Validation:** String normalization (lower, initcap, regex text removal). Strict data type casting (bigint, double). Listing dates standardized to YYYY-MM-DD. Duplicates removed. Data quality checks enforced. |
+| 🥇 **Gold** | **Business & AI Ready:** Statistical anomaly detection. PySpark Window functions remove extreme price outliers exceeding 3 standard deviations (Price ≤ Mean + 3×StdDev). Data aggregated by Brand/Model/Year. Optimized for analytics and ML pipelines. |
+
+### 3️⃣ Data Flow Diagram
+
+```
+Web Sources (Hatla2ee, ContactCars, YallaMotor)
+            ↓
+        Scraping
+            ↓
+       Bronze Layer (Raw Data)
+            ↓
+       Silver Layer (Cleansed)
+            ↓
+        Gold Layer (Refined)
+            ↓
+   Streamlit App & Power BI Dashboards
+```
+
+---
+
+## ✨ Features
+
 | Feature | Details |
 | :--- | :--- |
 | **Real-time Price Estimation** | Streamlit app queries Gold tables to provide accurate median prices for any selected Brand/Model/Year combination. |
 | **Statistical Outlier Filtering** | The platform automatically ignores fake or unrealistic listings to ensure data reliability and accurate market averages. |
 | **Market Dashboards** | Deep-dive Power BI reports tracking depreciation by year, mileage distributions, and geographic supply metrics (e.g., Toyota vs. Nissan). |
-| **Interactive Filtering** | Users can seamlessly filter market data by Location, Fuel Type (Gasoline vs. Natural Gas), Transmission, and Year. | <br> ## 🚀 Future Enhancements <br> * 🤖 **AI Price Prediction:** Implementing machine learning models to forecast future car values. <br> * 🎙️ **Arabic Voice Assistant:** NLP-powered voice searches for accessibility. <br> * 🔔 **Automatic Price Alerts:** Real-time notifications for market drops. <br> * 📱 **Mobile Application:** Expanding the Streamlit experience into a native mobile app. <br> ## 👥 The Team (DEPI - Microsoft Data Engineering Track)
+| **Interactive Filtering** | Users can seamlessly filter market data by Location, Fuel Type (Gasoline vs. Natural Gas), Transmission, and Year. |
+| **Scalable Architecture** | Medallion Architecture enables easy scaling and maintenance of data pipelines. |
+| **Historical Analytics** | Track market trends over time with immutable historical data. |
+
+---
+
+## 📁 Project Structure
+
+```
+NHA-4-084/
+├── notebooks/              # Jupyter notebooks for ETL pipelines
+│   ├── bronze_ingestion.ipynb
+│   ├── silver_cleaning.ipynb
+│   ├── gold_aggregation.ipynb
+│   └── exploratory_analysis.ipynb
+├── src/                    # Python modules
+│   ├── scrapers/          # Web scraping modules
+│   ├── data_processing/   # Transformation logic
+│   ├── utils/             # Helper functions
+│   └── config/            # Configuration files
+├── streamlit_app/         # Streamlit frontend application
+│   └── app.py
+├── power_bi/              # Power BI report definitions
+├── data/                  # Sample datasets
+├── requirements.txt       # Python dependencies
+├── README.md             # This file
+└── LICENSE               # License information
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **Python:** 3.8 or higher
+- **Databricks:** Workspace access (if running on Databricks)
+- **Git:** For cloning the repository
+- **pip:** Python package manager
+
+### Installation
+
+1. **Clone the repository:**
+```bash
+git clone https://github.com/nhahub/NHA-4-084.git
+cd NHA-4-084
+```
+
+2. **Create a virtual environment (recommended):**
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+3. **Install dependencies:**
+```bash
+pip install -r requirements.txt
+```
+
+4. **Configure your environment:**
+   - Set up Databricks credentials in your environment variables
+   - Update `config/` files with your API keys and workspace settings
+
+5. **Run the Streamlit app:**
+```bash
+streamlit run streamlit_app/app.py
+```
+
+---
+
+## 💡 Usage
+
+### Running the Streamlit Application
+
+1. Launch the app:
+```bash
+streamlit run streamlit_app/app.py
+```
+
+2. **Using the Dashboard:**
+   - Select vehicle specifications (Brand, Model, Year)
+   - View real-time median prices and market insights
+   - Filter by Location, Fuel Type, Transmission
+   - Explore historical trends and depreciation patterns
+
+### Running ETL Pipelines
+
+1. **Bronze Layer (Data Ingestion):**
+```python
+# Run notebook: notebooks/bronze_ingestion.ipynb
+# Scrapes data from all sources into raw Delta tables
+```
+
+2. **Silver Layer (Data Cleaning):**
+```python
+# Run notebook: notebooks/silver_cleaning.ipynb
+# Validates, cleanses, and standardizes data
+```
+
+3. **Gold Layer (Aggregation):**
+```python
+# Run notebook: notebooks/gold_aggregation.ipynb
+# Creates business-ready datasets with outlier filtering
+```
+
+### Exploring Data
+
+- **Jupyter Notebooks:** Use `notebooks/exploratory_analysis.ipynb` for ad-hoc analysis
+- **Power BI:** Connect to Gold layer tables for advanced visualizations
+
+---
+
+## 🚀 Future Enhancements
+
+- 🤖 **AI Price Prediction Models:** Implement regression and ensemble methods for price forecasting
+- 📱 **Mobile Application:** iOS/Android app for on-the-go market insights
+- 🔔 **Real-time Price Alerts:** Notify users when prices drop for specific vehicles
+- 🌍 **Market Expansion:** Extend to other Middle Eastern and North African markets
+- 📊 **Advanced Analytics:** Implement time-series forecasting and anomaly detection
+- 🔗 **API Service:** RESTful API for third-party integrations
+- 🎯 **Recommendation Engine:** ML-based vehicle recommendations based on user preferences
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please follow these guidelines:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+For detailed guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md) (if available).
+
+---
+
+## 👥 Team
+
 | Name | Role |
 | :--- | :--- |
 | **Yusif Saeed** | Data Engineering & Architecture |
@@ -34,6 +256,15 @@ We built a robust, scalable Data Warehouse leveraging **Databricks** and the **M
 | **Khaled Abdelmageed** | Data Engineering & Architecture |
 | **Karim Wessam** | Data Engineering & Architecture |
 
+---
+
+## 📄 License
+
+[Add your license here - e.g., MIT, Apache 2.0, etc.]
+
+---
+
 <div align="center">
-Live App
+<p><strong>Made with ❤️ by the NHA Team</strong></p>
+<p><a href="#"><strong>🔗 Live App</strong></a> | <a href="https://github.com/nhahub/NHA-4-084">GitHub</a></p>
 </div>
